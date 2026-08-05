@@ -26,14 +26,7 @@ def get_base64_image(file_path: str) -> str:
 
 logo_base64 = get_base64_image("logo.png")
 
-# Initialize Database safely for Streamlit Cloud
-try:
-    asyncio.run(init_db())
-except RuntimeError:
-    # If there's already a running event loop, use this fallback
-    import nest_asyncio
-    nest_asyncio.apply()
-    asyncio.run(init_db())
+asyncio.run(init_db())
 
 # ============================
 # PAGE CONFIG
