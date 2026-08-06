@@ -69,133 +69,136 @@ dark_class = "dark-mode" if dark_mode else "light-mode"
 # CUSTOM CSS – BLUE & YELLOW THEME
 # ============================
 st.markdown(f"""
+st.markdown(f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
 
     * {{
         font-family: 'Inter', sans-serif;
-        transition: background-color 0.25s ease, color 0.2s ease, box-shadow 0.2s ease;
+        transition: background-color 0.25s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }}
 
     /* ---------- LIGHT MODE ---------- */
     .light-mode .stApp {{
-        background: linear-gradient(145deg, #f0f4ff 0%, #ffffff 100%);
+        background: #f0f7ff;
     }}
     .light-mode .main-header {{
-        color: #1a365d;
+        color: #1e3a8a;
         font-weight: 800;
-        text-shadow: 0 2px 12px rgba(26, 54, 93, 0.15);
-    }}
-    .light-mode .main-header .yellow-text {{
-        color: #d69e2e;
+        text-shadow: 0 2px 12px rgba(30, 58, 138, 0.15);
     }}
     .light-mode .sub-header {{
-        color: #2d3748;
-        border-bottom: 3px solid #d69e2e;
+        color: #1e293b;
+        border-bottom: 4px solid #facc15;
     }}
     .light-mode .card {{
         background: #ffffff;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 4px 12px rgba(26, 54, 93, 0.08);
+        border: 1px solid #dbeafe;
+        box-shadow: 0 4px 16px rgba(30, 58, 138, 0.08);
         border-radius: 16px;
     }}
     .light-mode .metric-card {{
         background: #ffffff;
-        border-left: 6px solid #2b6cb0;
-        box-shadow: 0 6px 18px rgba(43, 108, 176, 0.12);
+        border-left: 6px solid #2563eb;
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.15);
         border-radius: 12px;
     }}
     .light-mode .metric-card .value {{
-        color: #1a365d;
+        color: #1e3a8a;
     }}
     .light-mode .stButton > button {{
-        background: linear-gradient(135deg, #2b6cb0, #1a365d);
+        background: linear-gradient(135deg, #2563eb, #1e3a8a);
         color: white;
         border: none;
         border-radius: 10px;
-        font-weight: 600;
-        box-shadow: 0 4px 10px rgba(43, 108, 176, 0.3);
+        font-weight: 700;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
         transition: all 0.2s;
     }}
     .light-mode .stButton > button:hover {{
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(43, 108, 176, 0.45);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 28px rgba(37, 99, 235, 0.5);
     }}
     .light-mode .stSidebar {{
         background: #ffffff;
-        border-right: 2px solid #e2e8f0;
+        border-right: 2px solid #dbeafe;
     }}
     .light-mode .sidebar-heading {{
-        color: #2b6cb0;
+        color: #2563eb;
         font-weight: 700;
     }}
     .light-mode .stTabs [data-baseweb="tab"][aria-selected="true"] {{
-        background: #d69e2e;
-        color: #1a365d;
+        background: #facc15;
+        color: #1e3a8a;
         font-weight: 700;
         border-radius: 8px 8px 0 0;
-        border-bottom: 3px solid #2b6cb0;
+        border-bottom: 3px solid #1e3a8a;
+        box-shadow: 0 -2px 8px rgba(250, 204, 21, 0.3);
+    }}
+    .light-mode .stTabs [data-baseweb="tab"]:hover {{
+        background: #fef3c7;
     }}
 
     /* ---------- DARK MODE ---------- */
     .dark-mode .stApp {{
-        background: linear-gradient(145deg, #0b1a2e 0%, #132337 100%);
+        background: #0b1a2e;
     }}
     .dark-mode .main-header {{
-        color: #f6e05e;
+        color: #facc15;
         font-weight: 800;
-        text-shadow: 0 2px 20px rgba(214, 158, 46, 0.25);
-    }}
-    .dark-mode .main-header .yellow-text {{
-        color: #f6e05e;
+        text-shadow: 0 2px 24px rgba(250, 204, 21, 0.25);
     }}
     .dark-mode .sub-header {{
-        color: #a0aec0;
-        border-bottom: 3px solid #f6e05e;
+        color: #cbd5e1;
+        border-bottom: 4px solid #facc15;
     }}
     .dark-mode .card {{
-        background: #1a2a41;
-        border: 1px solid #2d3748;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        background: #152238;
+        border: 1px solid #1e3a5f;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
         border-radius: 16px;
     }}
     .dark-mode .metric-card {{
-        background: #1a2a41;
-        border-left: 6px solid #f6e05e;
-        box-shadow: 0 6px 18px rgba(246, 224, 94, 0.15);
+        background: #152238;
+        border-left: 6px solid #facc15;
+        box-shadow: 0 6px 20px rgba(250, 204, 21, 0.15);
         border-radius: 12px;
     }}
     .dark-mode .metric-card .value {{
-        color: #f6e05e;
+        color: #facc15;
     }}
     .dark-mode .stButton > button {{
-        background: linear-gradient(135deg, #f6e05e, #d69e2e);
+        background: linear-gradient(135deg, #facc15, #eab308);
         color: #0b1a2e;
         border: none;
         border-radius: 10px;
         font-weight: 700;
-        box-shadow: 0 4px 14px rgba(246, 224, 94, 0.3);
+        box-shadow: 0 4px 16px rgba(250, 204, 21, 0.35);
         transition: all 0.2s;
     }}
     .dark-mode .stButton > button:hover {{
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(246, 224, 94, 0.5);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 32px rgba(250, 204, 21, 0.55);
     }}
     .dark-mode .stSidebar {{
         background: #0f1e30;
-        border-right: 2px solid #2d3748;
+        border-right: 2px solid #1e3a5f;
     }}
     .dark-mode .sidebar-heading {{
-        color: #f6e05e;
+        color: #facc15;
         font-weight: 700;
     }}
     .dark-mode .stTabs [data-baseweb="tab"][aria-selected="true"] {{
-        background: #f6e05e;
+        background: #facc15;
         color: #0b1a2e;
         font-weight: 700;
         border-radius: 8px 8px 0 0;
-        border-bottom: 3px solid #f6e05e;
+        border-bottom: 3px solid #facc15;
+        box-shadow: 0 -2px 8px rgba(250, 204, 21, 0.3);
+    }}
+    .dark-mode .stTabs [data-baseweb="tab"]:hover {{
+        background: #1e3a5f;
     }}
 
     /* ---------- COMMON ELEMENTS ---------- */
@@ -210,7 +213,7 @@ st.markdown(f"""
         font-weight: 500;
         padding-bottom: 0.8rem;
         margin-bottom: 1rem;
-        border-bottom-width: 3px;
+        border-bottom-width: 4px;
         border-bottom-style: solid;
     }}
     .sidebar-heading {{
@@ -225,22 +228,35 @@ st.markdown(f"""
         margin-bottom: 1rem;
     }}
     .card:hover {{
-        transform: translateY(-2px);
-        box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.08);
     }}
     .dark-mode .card:hover {{
-        box-shadow: 0 8px 28px rgba(246, 224, 94, 0.08);
+        box-shadow: 0 8px 32px rgba(250, 204, 21, 0.08);
     }}
     .metric-card {{
         padding: 1rem 1.2rem;
         transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+    }}
+    .metric-card::after {{
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 60px;
+        background: radial-gradient(circle, rgba(250,204,21,0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
     }}
     .metric-card:hover {{
         transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        box-shadow: 0 8px 28px rgba(0,0,0,0.1);
     }}
     .dark-mode .metric-card:hover {{
-        box-shadow: 0 8px 24px rgba(246, 224, 94, 0.12);
+        box-shadow: 0 8px 28px rgba(250, 204, 21, 0.12);
     }}
     .metric-card .label {{
         font-size: 0.75rem;
@@ -250,13 +266,13 @@ st.markdown(f"""
         display: flex;
         align-items: center;
         gap: 6px;
-        color: #718096;
+        color: #475569;
     }}
     .dark-mode .metric-card .label {{
-        color: #a0aec0;
+        color: #94a3b8;
     }}
     .metric-card .value {{
-        font-size: 1.9rem;
+        font-size: 2rem;
         font-weight: 800;
         margin-top: 0.2rem;
     }}
@@ -264,18 +280,19 @@ st.markdown(f"""
         font-weight: 600;
         transition: all 0.2s;
         border-radius: 10px;
-        padding: 0.5rem 1.2rem;
+        padding: 0.5rem 1.4rem;
+        letter-spacing: 0.02em;
     }}
     .stButton > button:active {{
-        transform: scale(0.97);
+        transform: scale(0.96);
     }}
     .stTabs [data-baseweb="tab-list"] {{
         gap: 0.3rem;
-        border-bottom: 2px solid #e2e8f0;
+        border-bottom: 2px solid #dbeafe;
         padding-bottom: 0.3rem;
     }}
     .dark-mode .stTabs [data-baseweb="tab-list"] {{
-        border-bottom-color: #2d3748;
+        border-bottom-color: #1e3a5f;
     }}
     .stTabs [data-baseweb="tab"] {{
         font-weight: 600;
@@ -283,30 +300,36 @@ st.markdown(f"""
         border-radius: 8px 8px 0 0;
         transition: all 0.15s;
     }}
-    .stTabs [data-baseweb="tab"]:hover {{
-        background: rgba(214, 158, 46, 0.15);
-    }}
-    .dark-mode .stTabs [data-baseweb="tab"]:hover {{
-        background: rgba(246, 224, 94, 0.15);
-    }}
     .stAlert {{
         border-radius: 12px;
+        border-left: 5px solid;
+    }}
+    .stAlert.error {{
+        border-left-color: #dc2626;
+    }}
+    .stAlert.warning {{
+        border-left-color: #facc15;
+    }}
+    .stAlert.success {{
+        border-left-color: #22c55e;
+    }}
+    .stAlert.info {{
+        border-left-color: #2563eb;
     }}
     .footer {{
         font-size: 0.75rem;
         text-align: center;
         margin-top: 2.5rem;
         padding-top: 1rem;
-        border-top: 2px solid #e2e8f0;
-        color: #718096;
+        border-top: 2px solid #dbeafe;
+        color: #64748b;
     }}
     .dark-mode .footer {{
-        border-top-color: #2d3748;
-        color: #a0aec0;
+        border-top-color: #1e3a5f;
+        color: #94a3b8;
     }}
 </style>
 """, unsafe_allow_html=True)
-
 # ============================
 # AUTHENTICATION
 # ============================
