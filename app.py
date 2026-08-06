@@ -53,299 +53,243 @@ for k, v in defaults.items():
         st.session_state[k] = v
 
 # ============================
-# THEME DETECTION (reliable)
+# THEME-AWARE CSS (works with Streamlit toggle)
 # ============================
-try:
-    is_dark = st.context.theme.base == "dark"
-except Exception:
-    # Fallback for older Streamlit versions
-    is_dark = st.get_option("theme.base") == "dark"
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
 
-# ============================
-# CUSTOM CSS – FULLY THEME AWARE
-# ============================
-if is_dark:
-    css = """
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
-        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+/* ========== LIGHT MODE (default) ========== */
+.main-header {
+    font-size: 2.05rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #1e3a8a;
+    margin: 0;
+    line-height: 1.2;
+}
+.sub-header {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: #475569;
+    margin-top: 0.2rem;
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid #e2e8f0;
+}
 
-        .stApp { background: #0b1120 !important; }
+.metric-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #2563eb;
+    border-radius: 12px;
+    padding: 1.05rem 1.2rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    height: 100%;
+}
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.12);
+}
+.metric-card .label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 0.3rem;
+}
+.metric-card .value {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #1e3a8a;
+    line-height: 1.2;
+}
 
-        .main-header {
-            font-size: 2.05rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: #facc15;
-            margin: 0;
-            line-height: 1.2;
-        }
-        .sub-header {
-            font-size: 0.92rem;
-            font-weight: 500;
-            color: #94a3b8;
-            margin-top: 0.2rem;
-            margin-bottom: 1.4rem;
-            padding-bottom: 0.7rem;
-            border-bottom: 1px solid #1e293b;
-        }
+.sidebar-heading {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #2563eb;
+    margin-top: 1.2rem;
+    margin-bottom: 0.45rem;
+}
 
-        .metric-card {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-left: 4px solid #facc15;
-            border-radius: 12px;
-            padding: 1.05rem 1.2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-            height: 100%;
-        }
-        .metric-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(250, 204, 21, 0.12);
-        }
-        .metric-card .label {
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #94a3b8;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 0.3rem;
-        }
-        .metric-card .value {
-            font-size: 1.55rem;
-            font-weight: 800;
-            color: #facc15;
-            line-height: 1.2;
-        }
+.section-title {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+.section-caption {
+    font-size: 0.84rem;
+    color: #64748b;
+    margin-bottom: 1.15rem;
+}
 
-        section[data-testid="stSidebar"] {
-            background: #0f172a !important;
-            border-right: 1px solid #1e293b;
-        }
-        .sidebar-heading {
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: #facc15;
-            margin-top: 1.2rem;
-            margin-bottom: 0.45rem;
-        }
+.footer {
+    font-size: 0.72rem;
+    text-align: center;
+    margin-top: 2.8rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid #e2e8f0;
+    color: #94a3b8;
+}
 
-        .stButton > button {
-            background: linear-gradient(135deg, #facc15, #eab308) !important;
-            color: #0f172a !important;
-            border: none !important;
-            border-radius: 8px !important;
-            font-weight: 600 !important;
-            padding: 0.55rem 1.25rem !important;
-            box-shadow: 0 2px 8px rgba(250, 204, 21, 0.25) !important;
-            transition: all 0.15s ease !important;
-        }
-        .stButton > button:hover {
-            background: linear-gradient(135deg, #eab308, #ca8a04) !important;
-            box-shadow: 0 4px 14px rgba(250, 204, 21, 0.35) !important;
-            transform: translateY(-1px);
-        }
+/* Buttons – light */
+.stButton > button {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    padding: 0.55rem 1.25rem !important;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25) !important;
+    transition: all 0.15s ease !important;
+}
+.stButton > button:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af) !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35) !important;
+    transform: translateY(-1px);
+}
 
-        .stTabs [data-baseweb="tab-list"] {
-            gap: 0.2rem;
-            border-bottom: 1px solid #1e293b;
-        }
-        .stTabs [data-baseweb="tab"] {
-            font-weight: 600 !important;
-            font-size: 0.88rem !important;
-            padding: 0.55rem 1rem !important;
-            border-radius: 8px 8px 0 0 !important;
-            color: #94a3b8 !important;
-        }
-        .stTabs [data-baseweb="tab"][aria-selected="true"] {
-            background: #facc15 !important;
-            color: #0f172a !important;
-        }
-        .stTabs [data-baseweb="tab"]:hover {
-            background: #1e293b !important;
-            color: #facc15 !important;
-        }
+/* Tabs – light */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 0.2rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+.stTabs [data-baseweb="tab"] {
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    padding: 0.55rem 1rem !important;
+    border-radius: 8px 8px 0 0 !important;
+    color: #64748b !important;
+}
+.stTabs [data-baseweb="tab"][aria-selected="true"] {
+    background: #2563eb !important;
+    color: white !important;
+}
+.stTabs [data-baseweb="tab"]:hover {
+    background: #eff6ff !important;
+    color: #1e40af !important;
+}
 
-        .section-title {
-            font-size: 1.12rem;
-            font-weight: 700;
-            color: #e2e8f0;
-            margin-bottom: 0.3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.45rem;
-        }
-        .section-caption {
-            font-size: 0.84rem;
-            color: #94a3b8;
-            margin-bottom: 1.15rem;
-        }
+/* ========== DARK MODE OVERRIDES ========== */
+/* Covers Streamlit's common dark mode markers */
+html.theme-dark .main-header,
+[data-theme="dark"] .main-header,
+.stApp[data-theme="dark"] .main-header {
+    color: #facc15 !important;
+}
 
-        .footer {
-            font-size: 0.72rem;
-            text-align: center;
-            margin-top: 2.8rem;
-            padding-top: 1.1rem;
-            border-top: 1px solid #1e293b;
-            color: #64748b;
-        }
+html.theme-dark .sub-header,
+[data-theme="dark"] .sub-header,
+.stApp[data-theme="dark"] .sub-header {
+    color: #94a3b8 !important;
+    border-bottom-color: #1e293b !important;
+}
 
-        [data-testid="stMetricValue"] { color: #facc15 !important; font-weight: 700 !important; }
-        [data-testid="stMetricLabel"] { color: #94a3b8 !important; }
+html.theme-dark .metric-card,
+[data-theme="dark"] .metric-card,
+.stApp[data-theme="dark"] .metric-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    border-left-color: #facc15 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25) !important;
+}
+html.theme-dark .metric-card:hover,
+[data-theme="dark"] .metric-card:hover {
+    box-shadow: 0 6px 16px rgba(250, 204, 21, 0.12) !important;
+}
+html.theme-dark .metric-card .label,
+[data-theme="dark"] .metric-card .label {
+    color: #94a3b8 !important;
+}
+html.theme-dark .metric-card .value,
+[data-theme="dark"] .metric-card .value {
+    color: #facc15 !important;
+}
 
-        .stAlert { border-radius: 10px !important; }
-    </style>
-    """
-else:
-    css = """
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+html.theme-dark .sidebar-heading,
+[data-theme="dark"] .sidebar-heading {
+    color: #facc15 !important;
+}
 
-        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+html.theme-dark .section-title,
+[data-theme="dark"] .section-title {
+    color: #e2e8f0 !important;
+}
+html.theme-dark .section-caption,
+[data-theme="dark"] .section-caption {
+    color: #94a3b8 !important;
+}
 
-        .stApp { background: #f8fafc !important; }
+html.theme-dark .footer,
+[data-theme="dark"] .footer {
+    border-top-color: #1e293b !important;
+    color: #64748b !important;
+}
 
-        .main-header {
-            font-size: 2.05rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: #1e3a8a;
-            margin: 0;
-            line-height: 1.2;
-        }
-        .sub-header {
-            font-size: 0.92rem;
-            font-weight: 500;
-            color: #475569;
-            margin-top: 0.2rem;
-            margin-bottom: 1.4rem;
-            padding-bottom: 0.7rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
+/* Buttons – dark */
+html.theme-dark .stButton > button,
+[data-theme="dark"] .stButton > button {
+    background: linear-gradient(135deg, #facc15, #eab308) !important;
+    color: #0f172a !important;
+    box-shadow: 0 2px 8px rgba(250, 204, 21, 0.25) !important;
+}
+html.theme-dark .stButton > button:hover,
+[data-theme="dark"] .stButton > button:hover {
+    background: linear-gradient(135deg, #eab308, #ca8a04) !important;
+    box-shadow: 0 4px 14px rgba(250, 204, 21, 0.35) !important;
+}
 
-        .metric-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid #2563eb;
-            border-radius: 12px;
-            padding: 1.05rem 1.2rem;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-            height: 100%;
-        }
-        .metric-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.12);
-        }
-        .metric-card .label {
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #64748b;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 0.3rem;
-        }
-        .metric-card .value {
-            font-size: 1.55rem;
-            font-weight: 800;
-            color: #1e3a8a;
-            line-height: 1.2;
-        }
+/* Tabs – dark */
+html.theme-dark .stTabs [data-baseweb="tab-list"],
+[data-theme="dark"] .stTabs [data-baseweb="tab-list"] {
+    border-bottom-color: #1e293b !important;
+}
+html.theme-dark .stTabs [data-baseweb="tab"],
+[data-theme="dark"] .stTabs [data-baseweb="tab"] {
+    color: #94a3b8 !important;
+}
+html.theme-dark .stTabs [data-baseweb="tab"][aria-selected="true"],
+[data-theme="dark"] .stTabs [data-baseweb="tab"][aria-selected="true"] {
+    background: #facc15 !important;
+    color: #0f172a !important;
+}
+html.theme-dark .stTabs [data-baseweb="tab"]:hover,
+[data-theme="dark"] .stTabs [data-baseweb="tab"]:hover {
+    background: #1e293b !important;
+    color: #facc15 !important;
+}
 
-        section[data-testid="stSidebar"] {
-            background: #ffffff !important;
-            border-right: 1px solid #e2e8f0;
-        }
-        .sidebar-heading {
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: #2563eb;
-            margin-top: 1.2rem;
-            margin-bottom: 0.45rem;
-        }
+/* Native Streamlit metrics stay readable */
+[data-testid="stMetricValue"] {
+    font-weight: 700 !important;
+}
+html.theme-dark [data-testid="stMetricValue"],
+[data-theme="dark"] [data-testid="stMetricValue"] {
+    color: #facc15 !important;
+}
 
-        .stButton > button {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
-            color: white !important;
-            border: none !important;
-            border-radius: 8px !important;
-            font-weight: 600 !important;
-            padding: 0.55rem 1.25rem !important;
-            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25) !important;
-            transition: all 0.15s ease !important;
-        }
-        .stButton > button:hover {
-            background: linear-gradient(135deg, #1d4ed8, #1e40af) !important;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35) !important;
-            transform: translateY(-1px);
-        }
-
-        .stTabs [data-baseweb="tab-list"] {
-            gap: 0.2rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .stTabs [data-baseweb="tab"] {
-            font-weight: 600 !important;
-            font-size: 0.88rem !important;
-            padding: 0.55rem 1rem !important;
-            border-radius: 8px 8px 0 0 !important;
-            color: #64748b !important;
-        }
-        .stTabs [data-baseweb="tab"][aria-selected="true"] {
-            background: #2563eb !important;
-            color: white !important;
-        }
-        .stTabs [data-baseweb="tab"]:hover {
-            background: #eff6ff !important;
-            color: #1e40af !important;
-        }
-
-        .section-title {
-            font-size: 1.12rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 0.3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.45rem;
-        }
-        .section-caption {
-            font-size: 0.84rem;
-            color: #64748b;
-            margin-bottom: 1.15rem;
-        }
-
-        .footer {
-            font-size: 0.72rem;
-            text-align: center;
-            margin-top: 2.8rem;
-            padding-top: 1.1rem;
-            border-top: 1px solid #e2e8f0;
-            color: #94a3b8;
-        }
-
-        [data-testid="stMetricValue"] { color: #1e3a8a !important; font-weight: 700 !important; }
-        [data-testid="stMetricLabel"] { color: #64748b !important; }
-
-        .stAlert { border-radius: 10px !important; }
-    </style>
-    """
-
-st.markdown(css, unsafe_allow_html=True)
+.stAlert {
+    border-radius: 10px !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # ============================
 # AUTHENTICATION
@@ -653,6 +597,12 @@ with tab2:
     st.markdown('<div class="section-title"><i class="fas fa-globe"></i> Interactive 3D Well Trajectory</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-caption">Directional wellpath with vertical, build, tangent, and drop sections.</div>', unsafe_allow_html=True)
 
+    # Simple theme detection only for Plotly (safe fallback)
+    try:
+        is_dark = st.context.theme.type == "dark"
+    except Exception:
+        is_dark = False
+
     md = np.linspace(0, total_depth, 200)
     inc = np.zeros_like(md)
     az = np.radians(np.full_like(md, 60.0))
@@ -793,7 +743,7 @@ with tab4:
                 st.markdown('<div class="section-title" style="margin-top:1.4rem;"><i class="fas fa-plug"></i> P&A / Side-Track Plug</div>', unsafe_allow_html=True)
                 with st.expander("Design an abandonment plug"):
                     plug_len = st.number_input("Plug Length (ft)", value=200.0, step=50.0, key="plug_len")
-                    plug_dens = st.number_input("Plug Slurry Density (ppg)", value=15.0, step=0.1, key="plug_dens")
+                    plug_dens = st.number_input("Plug Surry Density (ppg)", value=15.0, step=0.1, key="plug_dens")
                     mud_dens = st.number_input("Mud Density in Hole (ppg)", value=12.0, step=0.1, key="mud_dens")
                     if st.button("Calculate Plug", key="plug_btn"):
                         pr = engine.design_abandonment_plug(
@@ -817,7 +767,7 @@ with tab4:
             else:
                 st.write(f"**Configuration:** {comp['description']}")
                 b1, b2 = st.columns(2)
-                b1.metric("Lead Slurry", f"{comp['lead_slurry']['software']:.2f} bbl", f"{comp['lead_slurry']['deviation_pct']:.1f}% vs industry")
+                b1.metric("Lead Surry", f"{comp['lead_slurry']['software']:.2f} bbl", f"{comp['lead_slurry']['deviation_pct']:.1f}% vs industry")
                 b2.metric("Tail Slurry", f"{comp['tail_slurry']['software']:.2f} bbl", f"{comp['tail_slurry']['deviation_pct']:.1f}% vs industry")
                 st.metric("Spacer Volume", f"{comp['spacer']['software']:.2f} bbl", f"{comp['spacer']['deviation_pct']:.1f}% vs industry")
                 if abs(comp["lead_slurry"]["deviation_pct"]) > 15 or abs(comp["tail_slurry"]["deviation_pct"]) > 15:
