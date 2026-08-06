@@ -74,10 +74,7 @@ st.markdown(f"""
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
 
-    * {{
-        font-family: 'Inter', sans-serif;
-        transition: background-color 0.25s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-    }}
+  
 
     /* ---------- LIGHT MODE ---------- */
     .light-mode .stApp {{
