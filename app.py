@@ -29,7 +29,7 @@ asyncio.run(init_db())
 # PAGE CONFIG
 # ============================
 st.set_page_config(
-    page_title="PyMudCement Optima Pro v5.0",
+    page_title="PyMudCement Optima Pro",
     page_icon="logo.png",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -239,7 +239,7 @@ if not st.session_state.authenticated:
         f"""
         <div style="text-align:center; padding: 2.5rem 0 1.2rem 0;">
             <img src="data:image/png;base64,{logo_base64}" style="height: 3.8rem; margin-bottom: 0.9rem;">
-            <div class="main-header">PyMudCement Optima Pro v5.0</div>
+            <div class="main-header">PyMudCement Optima Pro</div>
             <div class="sub-header" style="border:none; margin-bottom:0;">
                 Enterprise Hydraulic Engine & Real-Time AI Diagnostics
             </div>
@@ -282,7 +282,7 @@ with h1:
 with h2:
     st.markdown(
         f"""
-        <div class="main-header" style="margin-top:0.35rem;">PyMudCement Optima Pro v5.0</div>
+        <div class="main-header" style="margin-top:0.35rem;">PyMudCement Optima Pro</div>
         <div class="sub-header" style="margin-bottom:0.4rem; padding-bottom:0.5rem;">
             <i class="fas fa-user-circle"></i> {st.session_state.user_info["username"]}
             &nbsp;·&nbsp;
@@ -872,6 +872,6 @@ with tab5:
         st.warning("Run hydraulics calculations first.")
 
 st.markdown(
-    '<div class="footer">© 2026 PyMudCement Optima Pro v5.0 · PENG 258 Capstone</div>',
+    '<div class="footer">© 2026 PyMudCement Optima Pro · PENG 258 Capstone</div>',
     unsafe_allow_html=True,
 )
