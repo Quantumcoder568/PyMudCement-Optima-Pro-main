@@ -66,7 +66,7 @@ dark_mode = (theme == "dark")
 dark_class = "dark-mode" if dark_mode else "light-mode"
 
 # ============================
-# CUSTOM CSS (dynamic based on theme)
+# CUSTOM CSS – BLUE & YELLOW THEME
 # ============================
 st.markdown(f"""
 <style>
@@ -84,7 +84,10 @@ st.markdown(f"""
         background-color: #f8fafc;
     }}
     .light-mode .main-header {{
-        color: #0f172a;
+        background: linear-gradient(135deg, #1e40af, #facc15);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
     }}
     .light-mode .sub-header {{
         color: #475569;
@@ -92,28 +95,67 @@ st.markdown(f"""
     }}
     .light-mode .card {{
         background-color: #ffffff;
-        border: 1px solid #f1f5f9;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px rgba(30, 64, 175, 0.08);
     }}
     .light-mode .metric-card {{
         background: white;
-        border-left-color: #2563eb;
+        border-left: 4px solid #1e40af;
+        box-shadow: 0 2px 8px rgba(30, 64, 175, 0.10);
     }}
     .light-mode .metric-card .label {{
         color: #64748b;
     }}
     .light-mode .metric-card .value {{
-        color: #0f172a;
+        color: #1e40af;
     }}
-    .light-mode .stDataFrame {{
-        border-color: #e2e8f0;
+    .light-mode .stButton > button {{
+        background-color: #1e40af;
+        color: white;
+        border: 1px solid #1e40af;
+        border-radius: 8px;
+    }}
+    .light-mode .stButton > button:hover {{
+        background-color: #1d4ed8;
+        border-color: #1d4ed8;
+        box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
+        transform: translateY(-2px);
+    }}
+    .light-mode .stButton > button[kind="primary"] {{
+        background-color: #1e40af;
+        border-color: #1e40af;
+    }}
+    .light-mode .stButton > button[kind="primary"]:hover {{
+        background-color: #1d4ed8;
+        border-color: #1d4ed8;
+    }}
+    .light-mode .stSidebar {{
+        background-color: #ffffff;
+        border-right: 1px solid #e2e8f0;
     }}
     .light-mode .stTabs [data-baseweb="tab"] {{
         color: #475569;
     }}
     .light-mode .stTabs [data-baseweb="tab"][aria-selected="true"] {{
-        background-color: #f1f5f9;
-        color: #0f172a;
+        background-color: #dbeafe;
+        color: #1e40af;
+        border-bottom: 2px solid #1e40af;
+    }}
+    .light-mode .status-badge.success {{
+        background-color: #dcfce7;
+        color: #166534;
+    }}
+    .light-mode .status-badge.warning {{
+        background-color: #fef9c3;
+        color: #854d0e;
+    }}
+    .light-mode .status-badge.danger {{
+        background-color: #fee2e2;
+        color: #991b1b;
+    }}
+    .light-mode .footer {{
+        color: #64748b;
+        border-top-color: #e2e8f0;
     }}
 
     /* ---------- DARK MODE ---------- */
@@ -121,7 +163,10 @@ st.markdown(f"""
         background-color: #0f172a;
     }}
     .dark-mode .main-header {{
-        color: #f1f5f9;
+        background: linear-gradient(135deg, #facc15, #1e40af);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
     }}
     .dark-mode .sub-header {{
         color: #94a3b8;
@@ -130,71 +175,75 @@ st.markdown(f"""
     .dark-mode .card {{
         background-color: #1e293b;
         border: 1px solid #334155;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        box-shadow: 0 1px 3px rgba(250, 204, 21, 0.10);
     }}
     .dark-mode .metric-card {{
         background: #1e293b;
-        border-left-color: #3b82f6;
+        border-left: 4px solid #facc15;
+        box-shadow: 0 2px 8px rgba(250, 204, 21, 0.15);
     }}
     .dark-mode .metric-card .label {{
         color: #94a3b8;
     }}
     .dark-mode .metric-card .value {{
-        color: #f1f5f9;
+        color: #facc15;
     }}
-    .dark-mode .stDataFrame {{
-        border-color: #334155;
+    .dark-mode .stButton > button {{
+        background-color: #1e40af;
+        color: white;
+        border: 1px solid #1e40af;
+        border-radius: 8px;
+    }}
+    .dark-mode .stButton > button:hover {{
+        background-color: #2563eb;
+        border-color: #2563eb;
+        box-shadow: 0 4px 12px rgba(30, 64, 175, 0.40);
+        transform: translateY(-2px);
+    }}
+    .dark-mode .stButton > button[kind="primary"] {{
+        background-color: #1e40af;
+        border-color: #1e40af;
+    }}
+    .dark-mode .stButton > button[kind="primary"]:hover {{
+        background-color: #2563eb;
+        border-color: #2563eb;
+    }}
+    .dark-mode .stSidebar {{
+        background-color: #1e293b;
+        border-right: 1px solid #334155;
     }}
     .dark-mode .stTabs [data-baseweb="tab"] {{
         color: #94a3b8;
     }}
     .dark-mode .stTabs [data-baseweb="tab"][aria-selected="true"] {{
         background-color: #1e293b;
-        color: #f1f5f9;
+        color: #facc15;
+        border-bottom: 2px solid #facc15;
     }}
-    .dark-mode .stButton > button {{
-        background-color: #1e293b;
-        border-color: #334155;
-        color: #f1f5f9;
+    .dark-mode .status-badge.success {{
+        background-color: #064e3b;
+        color: #86efac;
     }}
-    .dark-mode .stButton > button:hover {{
-        background-color: #334155;
-        border-color: #475569;
+    .dark-mode .status-badge.warning {{
+        background-color: #78350f;
+        color: #fcd34d;
     }}
-    .dark-mode .stButton > button[kind="primary"] {{
-        background-color: #2563eb;
-        border-color: #2563eb;
-        color: white;
-    }}
-    .dark-mode .stButton > button[kind="primary"]:hover {{
-        background-color: #1d4ed8;
-    }}
-    .dark-mode .stSidebar {{
-        background-color: #1e293b;
-        border-right: 1px solid #334155;
-    }}
-    .dark-mode .stSidebar .sidebar-heading {{
-        color: #f1f5f9;
-    }}
-    .dark-mode .st-expander {{
-        border-color: #334155;
+    .dark-mode .status-badge.danger {{
+        background-color: #7f1d1d;
+        color: #fca5a5;
     }}
     .dark-mode .footer {{
         color: #64748b;
         border-top-color: #334155;
     }}
-    .dark-mode .stAlert {{
-        background-color: #1e293b;
-        border-color: #334155;
-    }}
 
-    /* ---------- COMMON ---------- */
+    /* ---------- COMMON STYLES ---------- */
     .main-header {{
-        font-size: 2.4rem;
-        font-weight: 700;
+        font-size: 2.6rem;
         letter-spacing: -0.02em;
         padding: 0.2rem 0;
         margin-bottom: 0.1rem;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }}
     .sub-header {{
         font-size: 1rem;
@@ -210,22 +259,36 @@ st.markdown(f"""
         margin-bottom: 0.5rem;
         font-size: 1.05rem;
         letter-spacing: -0.01em;
+        color: #1e40af;
+    }}
+    .dark-mode .sidebar-heading {{
+        color: #facc15;
     }}
     .card {{
         border-radius: 12px;
         padding: 1.2rem 1.4rem;
-        transition: box-shadow 0.2s ease;
+        transition: box-shadow 0.3s ease, transform 0.2s ease;
         margin-bottom: 1rem;
     }}
     .card:hover {{
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        transform: translateY(-2px);
+    }}
+    .dark-mode .card:hover {{
+        box-shadow: 0 8px 24px rgba(250, 204, 21, 0.08);
     }}
     .metric-card {{
         border-radius: 12px;
         padding: 1rem 1.2rem;
-        border-left-width: 4px;
-        border-left-style: solid;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }}
+    .metric-card:hover {{
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }}
+    .dark-mode .metric-card:hover {{
+        box-shadow: 0 8px 20px rgba(250, 204, 21, 0.12);
     }}
     .metric-card .label {{
         font-size: 0.75rem;
@@ -252,71 +315,40 @@ st.markdown(f"""
         font-weight: 600;
         letter-spacing: 0.02em;
     }}
-    .status-badge.success {{
-        background-color: #dcfce7;
-        color: #166534;
-    }}
-    .status-badge.warning {{
-        background-color: #fef3c7;
-        color: #92400e;
-    }}
-    .status-badge.danger {{
-        background-color: #fee2e2;
-        color: #991b1b;
-    }}
-    .dark-mode .status-badge.success {{
-        background-color: #064e3b;
-        color: #86efac;
-    }}
-    .dark-mode .status-badge.warning {{
-        background-color: #78350f;
-        color: #fcd34d;
-    }}
-    .dark-mode .status-badge.danger {{
-        background-color: #7f1d1d;
-        color: #fca5a5;
-    }}
     .stButton > button {{
-        border-radius: 8px;
         font-weight: 500;
-        transition: all 0.15s ease;
-        border-width: 1px;
-        border-style: solid;
-    }}
-    .stButton > button:hover {{
-        transform: translateY(-1px);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        transition: all 0.2s ease;
     }}
     .stButton > button:active {{
-        transform: translateY(0);
+        transform: scale(0.97);
     }}
     .stDataFrame {{
         border-radius: 8px;
-        border-width: 1px;
-        border-style: solid;
+        border: 1px solid #e2e8f0;
+    }}
+    .dark-mode .stDataFrame {{
+        border-color: #334155;
     }}
     .st-expander {{
-        border-width: 1px;
-        border-style: solid;
+        border: 1px solid #e2e8f0;
         border-radius: 8px;
+    }}
+    .dark-mode .st-expander {{
+        border-color: #334155;
     }}
     .stTabs [data-baseweb="tab-list"] {{
         gap: 0.5rem;
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
+        border-bottom: 1px solid #e2e8f0;
         padding-bottom: 0.5rem;
+    }}
+    .dark-mode .stTabs [data-baseweb="tab-list"] {{
+        border-bottom-color: #334155;
     }}
     .stTabs [data-baseweb="tab"] {{
         font-weight: 500;
         padding: 0.5rem 0.8rem;
         border-radius: 8px 8px 0 0;
         transition: all 0.15s;
-    }}
-    .stTabs [data-baseweb="tab"]:hover {{
-        background-color: #f1f5f9;
-    }}
-    .dark-mode .stTabs [data-baseweb="tab"]:hover {{
-        background-color: #334155;
     }}
     .footer {{
         font-size: 0.7rem;
@@ -621,36 +653,29 @@ with tab1:
                 st.error(f"Execution Error: {str(e)}")
 
 # ---------- TAB 2: 3D TRAJECTORY (theme‑aware) ----------
-## ---------- TAB 2: 3D TRAJECTORY (REALISTIC) ----------
 with tab2:
     st.markdown("### <i class='fas fa-globe'></i> Interactive 3D Well Trajectory Profile", unsafe_allow_html=True)
     st.caption("Directional wellpath with vertical, build, tangent, and drop sections.")
 
     # ---- Generate realistic directional well trajectory ----
-    # Define depths and angles
-    md = np.linspace(0, total_depth, 200)  # measured depth steps
+    md = np.linspace(0, total_depth, 200)
     inc = np.zeros_like(md)
-    az = np.radians(np.full_like(md, 60.0))  # constant azimuth
+    az = np.radians(np.full_like(md, 60.0))
 
-    # Vertical section: 0-2000 ft
     mask_vert = md <= 2000
     inc[mask_vert] = 0.0
 
-    # Build section: 2000-5000 ft (0 to 45 deg)
     mask_build = (md > 2000) & (md <= 5000)
     frac_build = (md[mask_build] - 2000) / (5000 - 2000)
     inc[mask_build] = np.radians(45.0 * frac_build)
 
-    # Tangent section: 5000-8000 ft (hold 45 deg)
     mask_tang = (md > 5000) & (md <= 8000)
     inc[mask_tang] = np.radians(45.0)
 
-    # Drop section: 8000-10000 ft (45 to 30 deg)
     mask_drop = (md > 8000) & (md <= total_depth)
     frac_drop = (md[mask_drop] - 8000) / (total_depth - 8000)
-    inc[mask_drop] = np.radians(45.0 - 15.0 * frac_drop)  # drop to 30 deg
+    inc[mask_drop] = np.radians(45.0 - 15.0 * frac_drop)
 
-    # Compute coordinates using average-angle method
     x = np.zeros_like(md)
     y = np.zeros_like(md)
     z = np.zeros_like(md)
@@ -662,23 +687,17 @@ with tab2:
         y[i] = y[i-1] + delta_md * np.sin(avg_inc) * np.sin(avg_az)
         z[i] = z[i-1] + delta_md * np.cos(avg_inc)
 
-    # ---- Detect current theme ----
     theme = st.get_option("theme.base")
-    # Use transparent background for the 3D scene so it picks up the app's CSS background
     scene_bgcolor = 'rgba(0,0,0,0)'
-    # Grid and axis line colours adapt to theme
     grid_color = "#334155" if theme == "dark" else "#e2e8f0"
     axis_color = "#94a3b8" if theme == "dark" else "#475569"
 
-    # ---- Build the Plotly figure ----
     fig = go.Figure()
-
-    # Main trajectory line with depth-based colour
     fig.add_trace(go.Scatter3d(
         x=x, y=y, z=z,
         mode='lines',
         line=dict(
-            color=z,                     # colour by depth
+            color=z,
             colorscale='Viridis',
             width=6,
             showscale=True,
@@ -687,7 +706,6 @@ with tab2:
         name='Wellpath'
     ))
 
-    # Add markers at key points
     key_depths = [0, 2000, 5000, 8000, total_depth]
     key_labels = ['Surface', 'KOP', 'EOB', 'Start Drop', 'TD']
     key_indices = [np.argmin(np.abs(md - d)) for d in key_depths]
@@ -700,7 +718,6 @@ with tab2:
         name='Key points'
     ))
 
-    # Optional: vertical line at surface location
     fig.add_trace(go.Scatter3d(
         x=[0, 0], y=[0, 0], z=[0, -200],
         mode='lines',
@@ -709,13 +726,12 @@ with tab2:
         showlegend=False
     ))
 
-    # ---- Apply theme-aware styling ----
     fig.update_layout(
         scene=dict(
             xaxis_title='Easting (ft)',
             yaxis_title='Northing (ft)',
             zaxis_title='True Vertical Depth (ft)',
-            bgcolor=scene_bgcolor,                # transparent
+            bgcolor=scene_bgcolor,
             xaxis=dict(
                 backgroundcolor=scene_bgcolor,
                 gridcolor=grid_color,
@@ -733,12 +749,12 @@ with tab2:
                 gridcolor=grid_color,
                 color=axis_color,
                 zerolinecolor=grid_color,
-                autorange='reversed'               # depth increases downward
+                autorange='reversed'
             ),
         ),
         margin=dict(l=0, r=0, b=0, t=30),
         height=650,
-        paper_bgcolor='rgba(0,0,0,0)',             # fully transparent
+        paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         legend=dict(
             x=0.02, y=0.98,
@@ -748,8 +764,6 @@ with tab2:
     )
 
     st.plotly_chart(fig, use_container_width=True)
-
-    
 
 # ---------- TAB 3: AI DIAGNOSTICS ----------
 with tab3:
